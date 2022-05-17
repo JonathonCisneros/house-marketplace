@@ -24,7 +24,7 @@ function Navbar() {
               height='36px'
             />
             <p
-              class={
+              className={
                 pathMatchRoute('/')
                   ? 'navbarListItemNameActive'
                   : 'navbarListItemName'
@@ -40,7 +40,7 @@ function Navbar() {
               height='36px'
             />
             <p
-              class={
+              className={
                 pathMatchRoute('/offers')
                   ? 'navbarListItemNameActive'
                   : 'navbarListItemName'
@@ -56,7 +56,7 @@ function Navbar() {
               height='36px'
             />
             <p
-              class={
+              className={
                 pathMatchRoute('/profile')
                   ? 'navbarListItemNameActive'
                   : 'navbarListItemName'
