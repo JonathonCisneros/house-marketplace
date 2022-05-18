@@ -4,6 +4,7 @@ import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRig
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import OAuth from '../components/OAuth';
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,7 +50,7 @@ function SignIn() {
   return (
     <>
       <div className='pageContainer'>
-        <header>
+        <header className='textCenter'>
           <p className='pageHeader'>Welcome Back!</p>
         </header>
         <form onSubmit={onSubmit}>
@@ -90,7 +91,7 @@ function SignIn() {
           </div>
         </form>
 
-        {/*Google OAuth*/}
+        <OAuth />
 
         <Link to='/sign-up' className='registerLink'>
           Sign Up

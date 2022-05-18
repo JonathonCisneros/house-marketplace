@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,7 +8,9 @@ import {
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { toast } from 'react-toastify';
+import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg';
 import visibilityIcon from '../assets/svg/visibilityIcon.svg';
+import OAuth from '../components/OAuth';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -65,7 +66,7 @@ function SignUp() {
   return (
     <>
       <div className='pageContainer'>
-        <header>
+        <header className='textCenter'>
           <p className='pageHeader'>Welcome Back!</p>
         </header>
         <form onSubmit={onSubmit}>
@@ -116,7 +117,7 @@ function SignUp() {
           </div>
         </form>
 
-        {/*Google OAuth*/}
+        <OAuth />
 
         <Link to='/sign-in' className='registerLink'>
           Already have an account? Sign in
