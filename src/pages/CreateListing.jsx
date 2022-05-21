@@ -92,8 +92,6 @@ function CreateListing() {
 
     if (geolocationEnabled) {
       // api key stored in a .env file
-      //  `http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_GEOCODE_API_KEY}&query=${address}`
-
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
       );

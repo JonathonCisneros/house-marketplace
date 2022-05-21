@@ -59,7 +59,7 @@ function Category() {
   return (
     <div className='category'>
       <header className='pageHeader'>
-        {params.categoryName === 'rent' ? 'Places for rent' : 'Places for sale'}
+        {params.categoryName === 'rent' ? 'Rental Listings' : 'Homes For Sale'}
       </header>
       {loading ? (
         <Spinner />
