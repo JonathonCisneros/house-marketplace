@@ -52,7 +52,7 @@ function Slider() {
           slidesPerView={1}
           pagination={{ clickable: true }}
           autoplay={{
-            delay: 3000,
+            delay: 4000,
             disableOnInteraction: false,
           }}
           cssMode={true}
@@ -75,11 +75,12 @@ function Slider() {
                 <p className='swiperSlidePrice'>
                   $
                   {data.discountedPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',') ??
-                    data.regularPrice
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    ? data.discountedPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    : data.regularPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                   {data.type === 'rent' && ' / month'}
                 </p>
               </div>

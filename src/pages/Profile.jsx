@@ -93,10 +93,10 @@ function Profile() {
           </form>
         </div>
 
-        <Link to='/create-listing'>
-          <img src={homeIcon} alt='home' className='' />
+        <Link to='/create-listing' className='createListing'>
+          <img src={homeIcon} alt='home' />
           <p>Sell or Rent Your Home</p>
-          <img src={homeIcon} alt='arrow right' />
+          <img src={arrowRight} alt='arrow right' />
         </Link>
       </main>
     </div>
