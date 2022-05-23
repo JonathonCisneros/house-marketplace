@@ -7,7 +7,6 @@
   padding-left: 0
 }
 
-
 .marginAuto {
   margin: auto !important;
 }
@@ -104,6 +103,7 @@ button {
 .category,
 .explore {
   margin: 1rem;
+  margin-bottom: 5rem;
 }
 @media (min-width: 1024px) {
   .pageContainer,

@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Spinner from '../components/Spinner';
 
 function EditListing() {
+  // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState(false);
@@ -79,6 +80,7 @@ function EditListing() {
     };
 
     fetchListing();
+    // eslint-disable-next-line
   }, [params.listingId, navigate]); // end of useEffect for fetching data
 
   // check if user is logged in, if not, then navigate to sign in page
@@ -99,6 +101,7 @@ function EditListing() {
     return () => {
       isMounted.current = false;
     };
+    // eslint-disable-next-line
   }, [isMounted]); // end of useEffect() for authentication
 
   const onSubmit = async (e) => {
@@ -167,6 +170,8 @@ function EditListing() {
                 break;
               case 'running':
                 console.log('Upload is running');
+                break;
+              default:
                 break;
             }
           },
