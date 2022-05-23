@@ -17,6 +17,7 @@ import ListingItem from '../components/ListingItem';
 function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastFetchListing, setLastFetchListing] = useState(null);
 
   const params = useParams();
 
@@ -37,6 +38,10 @@ function Category() {
         // execute query
         const querySnap = await getDocs(q);
 
+        // grabbing last listing for load more function
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchListing(lastVisible);
+
         const listings = [];
 
         querySnap.forEach((doc) => {
@@ -54,7 +59,44 @@ function Category() {
     };
 
     fetchListings();
-  }, [params.categoryName]);
+  }, [params.categoryName]); // end of useEffect
+
+  // pagination / load more
+  const onFetchMoreListings = async () => {
+    try {
+      // get a reference
+      const listingsRef = collection(db, 'listings');
+
+      // create a query
+      const q = query(
+        listingsRef,
+        where('type', '==', params.categoryName),
+        orderBy('timestamp', 'desc'),
+        startAfter(lastFetchListing), // get next 10 listings
+        limit(10)
+      );
+
+      // execute query
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchListing(lastVisible);
+
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings((prevState) => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      toast.error('Could not load more listings');
+    }
+  }; // end of onFetchMoreListings()
 
   return (
     <div className='category'>
@@ -76,6 +118,13 @@ function Category() {
               ))}
             </ul>
           </main>
+          <br />
+          <br />
+          {lastFetchListing && (
+            <p className='loadMore' onClick={onFetchMoreListings}>
+              Load More
+            </p>
+          )}
         </>
       ) : (
         <p>No listings for {params.categoryName}</p>

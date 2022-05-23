@@ -17,6 +17,7 @@ import ListingItem from '../components/ListingItem';
 function Offers() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lastFetchListing, setLastFetchListing] = useState(null);
 
   const params = useParams();
 
@@ -37,6 +38,10 @@ function Offers() {
         // execute query
         const querySnap = await getDocs(q);
 
+        // grabbing last listing for load more function
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+        setLastFetchListing(lastVisible);
+
         const listings = [];
 
         querySnap.forEach((doc) => {
@@ -55,6 +60,43 @@ function Offers() {
 
     fetchListings();
   }, []);
+
+  // pagination / load more
+  const onFetchMoreListings = async () => {
+    try {
+      // get a reference
+      const listingsRef = collection(db, 'listings');
+
+      // create a query
+      const q = query(
+        listingsRef,
+        where('offer', '==', true),
+        orderBy('timestamp', 'desc'),
+        startAfter(lastFetchListing), // get next 10 listings
+        limit(10)
+      );
+
+      // execute query
+      const querySnap = await getDocs(q);
+
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+      setLastFetchListing(lastVisible);
+
+      const listings = [];
+
+      querySnap.forEach((doc) => {
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+
+      setListings((prevState) => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      toast.error('Could not load more listings');
+    }
+  }; // end of onFetchMoreListings()
 
   return (
     <div className='category'>
@@ -78,7 +120,13 @@ function Offers() {
       ) : (
         <p>There are no current offers 🥺</p>
       )}
-       
+       <br />
+      <br />
+      {lastFetchListing && (
+        <p className='loadMore' onClick={onFetchMoreListings}>
+          Load More
+        </p>
+      )}
     </div>
   );
 }

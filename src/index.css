@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+.listingsList {
+  padding-left: 0
+}
+
+
 .marginAuto {
   margin: auto !important;
 }
@@ -89,7 +94,7 @@ button {
   cursor: pointer;
   position: absolute;
   top: -3.4%;
-  right: 20px;
+  right: 30px;
 }
 
 .pageContainer,
@@ -418,7 +423,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   position: relative;
 }
 
@@ -453,6 +458,7 @@ button {
   font-size: 0.7rem;
   opacity: 0.8;
   margin-bottom: 0;
+  padding-top: 15px
 }
 
 .categoryListingName {
