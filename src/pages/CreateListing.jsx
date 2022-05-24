@@ -440,7 +440,8 @@ function CreateListing() {
 
           <label className='formLabel'>Images</label>
           <p className='imagesInfo'>
-            The first image will be the cover photo (max 6).
+            Select up to 6 images, the first will display as cover (
+            <i>.jpg, .jpeg, and .png, up to 5MB</i>)
           </p>
           <input
             type='file'
@@ -448,7 +449,7 @@ function CreateListing() {
             id='images'
             onChange={onMutate}
             max='6'
-            accept='.jpg, jpeg, .png'
+            accept='.jpg, jpeg, .png,'
             multiple
             required
           />
